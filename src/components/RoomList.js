@@ -31,12 +31,13 @@ class RoomList extends Component {
     }
     render() {
     return (
-            <div>
-                <ul className = "roomList">
+            <div className = "roomList">
+                <header class="App-header">Bloc Chat!</header>     
+                <ul>
                     { this.state.rooms.map( (room) => {
                         return <li key={room.key}>{room.name}</li>;
                      } )}
-            </ul>
+                </ul>
                 <form onSubmit={ (e) => this.createRoom(e) }>
                     <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
                     <input type="submit"/>
