@@ -32,7 +32,7 @@ class RoomList extends Component {
     render() {
     return (
             <div className = "roomList">
-                <header class="App-header">Bloc Chat!</header>     
+                <header className="App-header">Bloc Chat!</header>     
                 <ul>
                     { this.state.rooms.map( (room) => {
                         return <li key={room.key}>{room.name}</li>;
