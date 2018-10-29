@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+body {
+  font-family: "Nunito", sans-serif;
+}
 .App {
   text-align: center;
 }
@@ -31,6 +36,6 @@
   }
 }
 
-.roomList {
-  max-width: 20%;
+aside.column {
+  max-width: 35%;
 }

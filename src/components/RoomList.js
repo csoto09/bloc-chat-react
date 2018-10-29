@@ -5,10 +5,10 @@ class RoomList extends Component {
         super(props);
         this.state = {
             rooms: [],
-            newRoomName: ''
+            newRoomName: '',
+            hideRoomField: true
         }
         this.roomsRef = this.props.firebase.database().ref('rooms');
-
     }
     componentDidMount() {
         this.roomsRef.on('child_added', snapshot => {
@@ -16,6 +16,9 @@ class RoomList extends Component {
             room.key = snapshot.key;
             this.setState({ rooms: this.state.rooms.concat( room ) });
         });
+    }
+    showRoomField(e) {
+        this.setState({ hideRoomField:false})
     }
     handleChange(e) {
         this.setState({ newRoomName: e.target.value })
@@ -27,20 +30,22 @@ class RoomList extends Component {
         this.roomsRef.push({
             name: newRoom 
         });  
-        this.setState({newRoomName:''});
+        this.setState({newRoomName:'',hideRoomField:true});
     }
     render() {
-    return (
-            <div className = "roomList">
-                <header className="App-header">Bloc Chat!</header>     
+        const display = this.state.hideRoomField ? { display:"none"} : {};
+        return (
+            <div className = "roomList">    
+                <header className="App-header">Bloc Chat!</header>
+                <button className="button is-rounded is-primary" onClick={ (e) => this.showRoomField(e) } >Add new room</button>     
                 <ul>
                     { this.state.rooms.map( (room) => {
-                        return <li key={room.key}>{room.name}</li>;
+                        return <li key={room.key}>{room.is}{room.name}</li>;
                      } )}
                 </ul>
-                <form onSubmit={ (e) => this.createRoom(e) }>
-                    <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
-                    <input type="submit"/>
+                <form onSubmit={ (e) => this.createRoom(e) } style={ display }>
+                    <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.handleChange(e) } className="input is-small is-rounded"/>
+                    <input className="button is-rounded is-info" type="submit"/>
                 </form>
             </div>
     )

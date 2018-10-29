@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+
+import 'bulma/css/bulma.css';
 import * as firebase from "firebase";
 import RoomList from './components/RoomList';
+import MessageList from './components/MessageList';
 
 
 // Initialize Firebase
@@ -16,13 +19,21 @@ var config = {
 firebase.initializeApp(config);
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeRoom: ''
+    }    
+  }
   render() {
     return (
-      <div className="App">
-        <aside>   
-          <RoomList firebase = {firebase}/> 
+      <div className="App columns">
+        <aside className="column">   
+          <RoomList firebase = {firebase} /> 
         </aside>
-
+        <main className="column">
+          <MessageList firebase = {firebase} />
+        </main>
       </div>
     );
   }
