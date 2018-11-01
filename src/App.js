@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import 'bulma/css/bulma.css';
+// import 'bulma/css/bulma.css';
 import * as firebase from "firebase";
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
@@ -25,14 +25,23 @@ class App extends Component {
       activeRoom: ''
     }    
   }
+  setActiveRoom = room => {this.setState({ activeRoom: room });}
+
   render() {
     return (
       <div className="App columns">
         <aside className="column">   
-          <RoomList firebase = {firebase} /> 
+          <RoomList
+            firebase = {firebase} 
+            activeRoom = {this.state.activeRoom}
+            setActiveRoom={this.setActiveRoom} 
+          /> 
         </aside>
         <main className="column">
-          <MessageList firebase = {firebase} />
+          <MessageList 
+            firebase = {firebase}
+            activeRoom = {this.state.activeRoom} 
+          />
         </main>
       </div>
     );

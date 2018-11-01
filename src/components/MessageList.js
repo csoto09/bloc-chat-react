@@ -26,18 +26,20 @@ class MessageList extends Component {
     this.messagesRef.push({
       username: 'csoto',
       content: newMessage,
-      roomId:"",
+      roomId:this.props.activeRoom,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
     });
     this.setState({newMessage:''})
   }
 
   render() {
-    return (
-      <div className="MessageList">
-      { this.state.messages.map( (message) => {
+    const messages = this.state.messages.map(message => {
+      if(message.roomId === this.props.activeRoom) { 
         return <p key={message.key}>{message.username}: {message.content}</p>;
-      } )}
+      }});
+    return (
+      <div className="MessageList">{messages}
+
       <form onSubmit={ (e) => this.newMessage(e) } >
         <input type="text" value={ this.state.newMessage } onChange={ (e) => this.handleChange(e) } className="input is-small is-rounded"/>
         <input className="button is-rounded is-info" type="submit"/>

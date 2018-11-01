@@ -37,10 +37,10 @@ class RoomList extends Component {
         return (
             <div className = "roomList">    
                 <header className="App-header">Bloc Chat!</header>
-                <button className="button is-rounded is-primary" onClick={ (e) => this.showRoomField(e) } >Add new room</button>     
+                <button className="button is-rounded is-primary" onClick={(e) => this.showRoomField(e) } >Add new room</button>     
                 <ul>
                     { this.state.rooms.map( (room) => {
-                        return <li key={room.key}>{room.is}{room.name}</li>;
+                        return <li key={room.key} onClick={() => this.props.setActiveRoom(room.key)}>{room.name}</li>;
                      } )}
                 </ul>
                 <form onSubmit={ (e) => this.createRoom(e) } style={ display }>
