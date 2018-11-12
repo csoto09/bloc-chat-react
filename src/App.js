@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-// import 'bulma/css/bulma.css';
+import 'bulma/css/bulma.css';
 import * as firebase from "firebase";
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
@@ -9,7 +9,7 @@ import User from "./components/User";
 
 
 // Initialize Firebase
-var config = {
+const config = {
   apiKey: "AIzaSyBw3sykxgvR04HCBbu7IqyGuAkgzTIC7xI",
   authDomain: "bloc-chat-react-c2244.firebaseapp.com",
   databaseURL: "https://bloc-chat-react-c2244.firebaseio.com",
@@ -23,10 +23,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeRoom: ''
+      activeRoom: '',
+      user: null
     }    
   }
   setActiveRoom = room => {this.setState({ activeRoom: room });}
+  setUser = user => {this.setState({ user: user });}
 
   render() {
     return (
@@ -39,12 +41,15 @@ class App extends Component {
           /> 
         </aside>
         <main className="column">
+         <User
+            firebase = {firebase}
+            setUser = {this.setUser}
+            user = {this.state.user} 
+          />
           <MessageList 
             firebase = {firebase}
-            activeRoom = {this.state.activeRoom} 
-          />
-          <User
-            firebase = {firebase}
+            activeRoom = {this.state.activeRoom}
+            user = {this.state.user} 
           />
         </main>
       </div>

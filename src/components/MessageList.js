@@ -24,7 +24,7 @@ class MessageList extends Component {
     if(!this.state.newMessage) {return}
     const newMessage = this.state.newMessage;
     this.messagesRef.push({
-      username: 'csoto',
+      username: this.props.user.displayName,
       content: newMessage,
       roomId:this.props.activeRoom,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
