@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import * as moment from 'moment';
+
 
 class MessageList extends Component {
   constructor(props) {
@@ -35,7 +37,7 @@ class MessageList extends Component {
   render() {
     const messages = this.state.messages.map(message => {
       if(message.roomId === this.props.activeRoom) { 
-        return <p key={message.key}>{message.username}: {message.content}</p>;
+        return <p key={message.key}>{message.username}: {message.content}<span className="timestamp">{moment(message.sentAt).format('LT')}</span></p>;
       }});
     return (
       <div className="MessageList">{messages}
